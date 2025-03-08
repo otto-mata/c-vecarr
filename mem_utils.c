@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                                            */
-/*   va_internals.h                                       ┌─┐┌┬┐┌┬┐┌─┐        */
+/*   mem_utils.c                                          ┌─┐┌┬┐┌┬┐┌─┐        */
 /*                                                        │ │ │  │ │ │        */
 /*   By: tblochet <tblochet@student.42.fr>                └─┘ ┴  ┴ └─┘        */
 /*                                                        ┌┬┐┌─┐┌┬┐┌─┐        */
-/*   Created: 2025/03/08 15:31:07 by tblochet             │││├─┤ │ ├─┤        */
-/*   Updated: 2025/03/08 17:29:16 by tblochet             ┴ ┴┴ ┴ ┴ ┴ ┴        */
+/*   Created: 2025/03/08 17:26:08 by tblochet             │││├─┤ │ ├─┤        */
+/*   Updated: 2025/03/08 17:26:28 by tblochet             ┴ ┴┴ ┴ ┴ ┴ ┴        */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VA_INTERNALS_H
-# define VA_INTERNALS_H
-# include <stdlib.h>
-# include <unistd.h>
+#include "va_internals.h"
 
-void	*om_memmove(void *d, void const *s, size_t sz);
-void	*om_realloc(void *mem, size_t old_sz, size_t new_sz);
-size_t	om_strlen(const char *s);
-char	*om_strcat(char *d, char const *s);
-void	__va_warn(char *s);
-#endif
+void	*om_realloc(void *mem, size_t old_sz, size_t new_sz)
+{
+	void	*nmem;
+	size_t	sz;
+
+	nmem = malloc(new_sz);
+	if (!nmem)
+		return (0);
+	if (!mem)
+		return (nmem);
+	if (new_sz < old_sz)
+		sz = new_sz;
+	else
+		sz = old_sz;
+	while (sz--)
+		((unsigned char *)nmem)[sz] = ((unsigned char *)mem)[sz];
+	free(mem);
+	return (nmem);
+}

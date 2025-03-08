@@ -1,9 +1,24 @@
 NAME=libvecarr.a
 AR=ar rcs
 CC=clang
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -g -O0
 CFLAGS+=-I./inc
-SRC=vecarr.c utils.c
+SRC=all.c \
+	delete.c \
+	destroy.c \
+	filter.c \
+	find.c \
+	init.c \
+	join.c \
+	map.c \
+	mem_utils.c \
+	pop.c \
+	push.c \
+	reverse.c \
+	slice.c \
+	some.c \
+	string_utils.c \
+	sum.c
 OBJ=$(SRC:.c=.o)
 
 $(NAME): $(OBJ)

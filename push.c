@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                                            */
-/*   vecarr.c                                             ┌─┐┌┬┐┌┬┐┌─┐        */
+/*   push.c                                               ┌─┐┌┬┐┌┬┐┌─┐        */
 /*                                                        │ │ │  │ │ │        */
 /*   By: tblochet <tblochet@student.42.fr>                └─┘ ┴  ┴ └─┘        */
 /*                                                        ┌┬┐┌─┐┌┬┐┌─┐        */
-/*   Created: 2025/03/08 15:25:09 by tblochet             │││├─┤ │ ├─┤        */
-/*   Updated: 2025/03/08 15:54:05 by tblochet             ┴ ┴┴ ┴ ┴ ┴ ┴        */
+/*   Created: 2025/03/08 16:08:45 by tblochet             │││├─┤ │ ├─┤        */
+/*   Updated: 2025/03/08 17:34:34 by tblochet             ┴ ┴┴ ┴ ┴ ┴ ┴        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "va_internals.h"
 #include <vecarr.h>
 
-void	init_vector(t_vecarr *v)
-{
-	v->len = 0;
-	v->allocd = 0;
-	v->step = 2;
-	v->data = NULL;
-}
-
-int	va_append(t_vecarr *v, void *item)
+int	va_push(t_vecarr *v, void *item)
 {
 	void	*tmp;
 
@@ -43,15 +35,5 @@ int	va_append(t_vecarr *v, void *item)
 	}
 	v->data[v->len] = item;
 	v->len++;
-	return (0);
-}
-
-int va_delete (t_vecarr *v, size_t index)
-{
-	if (index < 0 || index >= v->len)
-		return (-1);
-	om_memmove(v->data + index, v->data + index + 1, (v->len - index - 1)
-		* sizeof(void **));
-	v->len--;
 	return (0);
 }
